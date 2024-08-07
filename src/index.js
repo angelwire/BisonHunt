@@ -1,3 +1,5 @@
+const apiKey = "AIzaSyDTx8oMjiZenPowZy2kVuEocJ7GY28galo";
+
 var http = require("http"),
     url = require("url"),
     path = require("path"),
@@ -6,8 +8,8 @@ var http = require("http"),
 
 http.createServer(function(request, response) {
 
-  var uri = url.parse(request.url).pathname
-    , filename = path.join(process.cwd(), uri);
+  var uri = "\\files" + url.parse(request.url).pathname;
+  var filename = path.join(process.cwd(), uri);
 
   var contentTypesByExtension = {
     '.html': "text/html",
@@ -17,6 +19,7 @@ http.createServer(function(request, response) {
 
   fs.exists(filename, function(exists) {
     if(!exists) {
+      console.log("Could not find: " + filename);
       response.writeHead(404, {"Content-Type": "text/plain"});
       response.write("404 Not Found\n");
       response.end();
@@ -39,6 +42,7 @@ http.createServer(function(request, response) {
       response.writeHead(200, headers);
       response.write(file, "binary");
       response.end();
+      
     });
   });
 }).listen(parseInt(port, 10));
