@@ -1,5 +1,5 @@
 body {
-    background-color: powderblue;
+    background-color: #F4EFD2;
 }
 
 h1 {
@@ -13,4 +13,16 @@ p {
 #map {
     height: 500px;
     width: 800px;
+}
+
+.mapButton img {
+	-webkit-filter: blur(4px);
+	filter: blur(4px);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.mapButton:hover img {
+	-webkit-filter: blur(0px);
+	filter: blur(0px);
 }

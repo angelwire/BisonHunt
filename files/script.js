@@ -1,14 +1,31 @@
 let map;
 
 let startPosition = {lat: 36.735, lng: -95.945};
+let defaultZoom = 12.5;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
+
+    var bottomLat = 36.695;
+    var topLat = 36.773;
+    var leftLng = -96.015;
+    var rightLng = -95.888;
 
     map = new Map(document.getElementById("map"), {
         center: startPosition,
         zoom: 12.5,
         mapId: "a137be4faf3a019a",
+        disableDefaultUI: true,
+        minZoom: defaultZoom - 3,
+        maxZoom: defaultZoom + 3,
+        restriction: {
+          latLngBounds: {
+            north: topLat,
+            south: bottomLat,
+            east: rightLng,
+            west: leftLng,
+          }
+        },
     });
 
     var bottomLat = 36.695;
@@ -46,6 +63,7 @@ async function initMap() {
             this.div.style.borderStyle = "none";
             this.div.style.borderWidth = "0px";
             this.div.style.position = "absolute";
+            this.div.className = "mapButton";
         
             // Create the img element and attach it to the div.
             const img = document.createElement("img");
